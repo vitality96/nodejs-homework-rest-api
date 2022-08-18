@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAll, getById, add, removeById, updateById } = require('../../controllers/contacts');
+const { getAll, getById, add, removeById, updateById, updateStatusContact } = require('../../controllers/contacts');
 
 
 const router = express.Router()
@@ -13,5 +13,7 @@ router.post('/', add);
 router.delete('/:id', removeById);
 
 router.put('/:id', updateById);
+
+router.patch('/:id/favorite', updateStatusContact);
 
 module.exports = router
