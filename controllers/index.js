@@ -1,5 +1,10 @@
 const contacts = require('./contacts');
+const users = require('./users');
+const currentUser = require('./currentUser');
+
 
 module.exports = {
-    contacts
+    contacts,
+    users,
+    currentUser
 }
