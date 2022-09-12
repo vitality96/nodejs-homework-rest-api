@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User, joiSchema } = require('../../models/user');
 
-const SECRET_KEY = "kontent55570";
+const { SECRET_KEY } = process.env;
 
 const login = async (req, res, next) => {
     try {
@@ -14,12 +14,12 @@ const login = async (req, res, next) => {
         }
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (!user) {
-            throw new Unauthorized("Email or password is wrong")
+        if (!user || !user.verify) {
+            throw new Unauthorized("Email is wrong or not verify")
         }
         const passCompare = bcrypt.compareSync(password, user.password);
         if (!passCompare) {
-            throw new Unauthorized("Email or password is wrong")
+            throw new Unauthorized("Password is wrong")
         }
         const payload = {
             id: user._id
