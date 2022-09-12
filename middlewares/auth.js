@@ -3,7 +3,7 @@ const { Unauthorized } = require('http-errors');
 const { User } = require('../models/user');
 
 
-const SECRET_KEY = "kontent55570";
+const { SECRET_KEY } = process.env;
 
 const auth = async (req, res, next) => {
     const { authorization = "" } = req.headers;
